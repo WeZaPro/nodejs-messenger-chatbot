@@ -301,9 +301,9 @@ let callSendAPIWithTemplate = (sender_psid) => {
                     "template_type": "generic",
                     "elements": [
                         {
-                            "title": "Want to build sth awesome?",
-                            "image_url": "https://www.nexmo.com/wp-content/uploads/2018/10/build-bot-messages-api-768x384.png",
-                            "subtitle": "Watch more videos on my youtube channel ^^",
+                            "title": "welcome to onlineSabuyMe Website",
+                            "image_url": "https://www.onlinesabuyme.co.th/wp-content/uploads/2022/09/27100-Converted-04-768x768.png",
+                            "subtitle": "Access to Smart marketing channel",
                             "buttons": [
                                 {
                                     "type": "web_url",
