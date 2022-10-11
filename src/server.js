@@ -3,8 +3,16 @@ import express from "express";
 import viewEngine from "./config/viewEngine";
 import initWebRoute from "./routes/web";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 let app = express();
+
+const corsOptions = {
+   //origin: 'http://localhost:3000',
+   origin : "https://messenger-chat-bot-nodejs-mast.herokuapp.com/",
+   credentials: true,
+ };
+ app.use(cors(corsOptions));
 
 // config view engine
 viewEngine(app);
