@@ -66,63 +66,83 @@ let getWebhook = (req, res) => {
 };
 
 // Handles messages events //test-----*******************
-function handleMessage(sender_psid, received_message) {
-    let response;
+// function handleMessage(sender_psid, received_message) {
+//     let response;
 
-    // check message
-    console.log("get message----> ",received_message);
-    console.log("get message.text123----> ",received_message.text);
-    // Check if the message contains text
-    if (received_message.text) {
+//     // check message
+//     console.log("get message----> ",received_message);
+//     console.log("get message.text123----> ",received_message.text);
+//     // Check if the message contains text
+//     if (received_message.text) {
 
-        //test-----*******************
-        // callSendAPI(sender_psid, "Thank you for watching my video !!!");
+//         //test-----*******************
+//         // callSendAPI(sender_psid, "Thank you for watching my video !!!");
        
-        callSendAPI(sender_psid, received_message.text);
-        callSendAPIWithTemplate(sender_psid);
+//         callSendAPI(sender_psid, received_message.text);
+//         callSendAPIWithTemplate(sender_psid);
         
 
         
 
-        // Create the payload for a basic text message
-        response = {
-            "text": `You sent the message: "${received_message.text}". Now send me an image!`
-        }
-    } else if (received_message.attachments) {
+//         // Create the payload for a basic text message
+//         response = {
+//             "text": `You sent the message: "${received_message.text}". Now send me an image!`
+//         }
+//     } else if (received_message.attachments) {
 
-    // Gets the URL of the message attachment
-    let attachment_url = received_message.attachments[0].payload.url;
-        response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                        "title": "Is this the right picture?",
-                        "subtitle": "Tap a button to answer.",
-                        "image_url": attachment_url,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Yes!",
-                                "payload": "yes",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "No!",
-                                "payload": "no",
-                            }
-                        ],
-                    }]
-                }
-            }
-        }
+//     // Gets the URL of the message attachment
+//     let attachment_url = received_message.attachments[0].payload.url;
+//         response = {
+//             "attachment": {
+//                 "type": "template",
+//                 "payload": {
+//                     "template_type": "generic",
+//                     "elements": [{
+//                         "title": "Is this the right picture?",
+//                         "subtitle": "Tap a button to answer.",
+//                         "image_url": attachment_url,
+//                         "buttons": [
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Yes!",
+//                                 "payload": "yes",
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "No!",
+//                                 "payload": "no",
+//                             }
+//                         ],
+//                     }]
+//                 }
+//             }
+//         }
 
-}
+// }
 
-// Sends the response message
-    callSendAPI(sender_psid, response);
-}
+// // Sends the response message
+//     callSendAPI(sender_psid, response);
+// }
+
+// Handles messages events //test-----******************* 2
+function handleMessage(sender_psid, received_message) {
+
+    let response;
+  
+    // Check if the message contains text
+    if (received_message.text) {    
+  
+      // Create the payload for a basic text message
+      response = {
+        "text": `You sent the message: "${received_message.text}". Now send me an image!`
+      }
+    }  
+    
+    // Sends the response message
+    callSendAPI(sender_psid, response);    
+  }
+
+  
 
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
@@ -151,7 +171,7 @@ function callSendAPI(sender_psid, response) {
         "recipient": {
             "id": sender_psid
         },
-        "message": { "text": `ข้อความที่ส่งมาคือ ${response}` }
+        "message": { "text": response }
     };
 
     //test---*******************
