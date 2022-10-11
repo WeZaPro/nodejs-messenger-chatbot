@@ -71,7 +71,7 @@ function handleMessage(sender_psid, received_message) {
 
     // check message
     console.log("get message----> ",received_message);
-    console.log("get message.text----> ",received_message.text);
+    console.log("get message.text123----> ",received_message.text);
     // Check if the message contains text
     if (received_message.text) {
 
@@ -151,7 +151,7 @@ function callSendAPI(sender_psid, response) {
         "recipient": {
             "id": sender_psid
         },
-        "message": { "text": response }
+        "message": { "text": `ข้อความที่ส่งมาคือ ${response}` }
     };
 
     //test---*******************
