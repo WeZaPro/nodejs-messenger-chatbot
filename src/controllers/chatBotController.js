@@ -137,6 +137,7 @@ function handleMessage(sender_psid, received_message) {
         "text": `You sent the message: "${received_message.text}". Now send me an image!`
       }
 
+      console.log("handleMessage--> response--> ",response);
       callSendAPI2(sender_psid, response);
       callSendAPI(sender_psid, received_message.text);
       callSendAPIWithTemplate(sender_psid);
@@ -168,6 +169,7 @@ function handlePostback(sender_psid, received_postback) {
 
 // test------------
 function callSendAPI2(sender_psid, response) {
+    console.log("callSendAPI2--> respone---->", response);
     // Construct the message body
   let request_body = {
     "recipient": {
@@ -190,7 +192,7 @@ function callSendAPI2(sender_psid, response) {
     }
   }); 
   }
-  
+
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
 
