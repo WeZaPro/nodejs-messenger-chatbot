@@ -143,6 +143,9 @@ function handlePostback(sender_psid, received_postback) {
 
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
+
+    console.log("get response from callSendApi --> ",response);
+    
     // Construct the message body
     let request_body = {
         "recipient": {
@@ -150,6 +153,9 @@ function callSendAPI(sender_psid, response) {
         },
         "message": { "text": response }
     };
+
+    //test---*******************
+
 
     // Send the HTTP request to the Messenger Platform
     request({
