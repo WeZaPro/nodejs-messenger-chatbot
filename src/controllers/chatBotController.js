@@ -137,8 +137,10 @@ function handleMessage(sender_psid, received_message) {
         "text": `You sent the message: "${received_message.text}". Now send me an image!`
       }
 
+      callSendAPI2(sender_psid, response);
       callSendAPI(sender_psid, received_message.text);
-//         callSendAPIWithTemplate(sender_psid);
+      callSendAPIWithTemplate(sender_psid);
+      
     }  
     
     // Sends the response message
@@ -164,6 +166,31 @@ function handlePostback(sender_psid, received_postback) {
     callSendAPI(sender_psid, response);
 }
 
+// test------------
+function callSendAPI2(sender_psid, response) {
+    // Construct the message body
+  let request_body = {
+    "recipient": {
+      "id": sender_psid
+    },
+    "message": response
+  }
+
+  // Send the HTTP request to the Messenger Platform
+  request({
+    "uri": "https://graph.facebook.com/v2.6/me/messages",
+    "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+    "method": "POST",
+    "json": request_body
+  }, (err, res, body) => {
+    if (!err) {
+      console.log('message sent!')
+    } else {
+      console.error("Unable to send message:" + err);
+    }
+  }); 
+  }
+  
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
 
