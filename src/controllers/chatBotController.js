@@ -176,8 +176,8 @@ function callSendAPI2(sender_psid, response) {
     "recipient": {
       "id": sender_psid
     },
-    response
     //"message": response
+    "message": "callSendAPI2"
   }
 
   // Send the HTTP request to the Messenger Platform
