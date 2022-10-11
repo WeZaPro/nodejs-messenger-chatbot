@@ -76,8 +76,7 @@ function handleMessage(sender_psid, received_message) {
     if (received_message.text) {
 
         //test-----*******************
-        // callSendAPI(sender_psid, "Thank you for watching my video !!!");
-        callSendAPI(sender_psid, response);
+        callSendAPI(sender_psid, "Thank you for watching my video !!!");
         callSendAPIWithTemplate(sender_psid);
         
 
