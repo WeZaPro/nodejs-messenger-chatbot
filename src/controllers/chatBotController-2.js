@@ -20,6 +20,8 @@ let postWebhook = (req, res) =>{
             let sender_psid = webhook_event.sender.id;
             console.log('Sender PSID: ' + sender_psid);
 
+            // Check if the event is a message or postback and
+            // pass the event to the appropriate handler function
             if (webhook_event.message) {
                 handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
@@ -63,38 +65,78 @@ let getWebhook = (req, res) => {
     }
 };
 
-
-// Handles messages events //test-----******************* 2
+// Handles messages events //test-----*******************
 // function handleMessage(sender_psid, received_message) {
-
 //     let response;
 
-//     if (received_message.text === "1") {    
-//         response = {
-//             "text": `You sent the message: 0000-1 !`
-//         }
+//     // check message
+//     console.log("get message----> ",received_message);
+//     console.log("get message.text123----> ",received_message.text);
+//     // Check if the message contains text
+//     if (received_message.text) {
 
-//         callSendAPI2(sender_psid, response);
+//         //test-----*******************
+//         // callSendAPI(sender_psid, "Thank you for watching my video !!!");
+       
 //         callSendAPI(sender_psid, received_message.text);
 //         callSendAPIWithTemplate(sender_psid);
-//         //callSendAPIWithTemplate2(sender_psid);
-      
-//     } else{
+        
+
+        
+
+//         // Create the payload for a basic text message
 //         response = {
-//             "text": `You sent the message: ${received_message.text} !`
+//             "text": `You sent the message: "${received_message.text}". Now send me an image!`
+//         }
+//     } else if (received_message.attachments) {
+
+//     // Gets the URL of the message attachment
+//     let attachment_url = received_message.attachments[0].payload.url;
+//         response = {
+//             "attachment": {
+//                 "type": "template",
+//                 "payload": {
+//                     "template_type": "generic",
+//                     "elements": [{
+//                         "title": "Is this the right picture?",
+//                         "subtitle": "Tap a button to answer.",
+//                         "image_url": attachment_url,
+//                         "buttons": [
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Yes!",
+//                                 "payload": "yes",
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "No!",
+//                                 "payload": "no",
+//                             }
+//                         ],
+//                     }]
+//                 }
+//             }
 //         }
 
-//         callSendAPI2(sender_psid, response);
-//         callSendAPI(sender_psid, received_message.text);
-//         //callSendAPIWithTemplate(sender_psid);
-//         callSendAPIWithTemplate2(sender_psid);
-      
-//     }  
 // }
 
+// // Sends the response message
+//     callSendAPI(sender_psid, response);
+// }
+
+// Handles messages events //test-----******************* 2
 function handleMessage(sender_psid, received_message) {
 
     let response;
+
+    // if (received_message.text) {    
+    //      response = {
+    //          "text": `You sent the message: "${received_message.text}". Now send me an image!`
+    //  }
+    //     callSendAPI2(sender_psid, response);
+    //     callSendAPI(sender_psid, received_message.text);
+    //     callSendAPIWithTemplate(sender_psid);
+    // }
 
     if (received_message.text === "1") {    
         response = {
@@ -102,31 +144,26 @@ function handleMessage(sender_psid, received_message) {
         }
 
         callSendAPI2(sender_psid, response);
-        //callSendAPI(sender_psid, received_message.text);
-        callSendAPIWithTemplate(sender_psid);
-        //callSendAPIWithTemplate2(sender_psid);
-      
-    } else if (received_message.text === "2"){
-        response = {
-            "text": `You sent the message: 0000-2 !`
-        }
-
-        callSendAPI2(sender_psid, response);
-        //callSendAPI(sender_psid, received_message.text);
+        callSendAPI(sender_psid, received_message.text);
         callSendAPIWithTemplate(sender_psid);
         //callSendAPIWithTemplate2(sender_psid);
       
     } else{
         response = {
-            "text": `You sent the message: ${received_message.text} กรุณาเลือกเมนูด้วยครับ !`
+            "text": `You sent the message: ${received_message.text} !`
         }
 
         callSendAPI2(sender_psid, response);
-        //callSendAPI(sender_psid, received_message.text);
+        callSendAPI(sender_psid, received_message.text);
         //callSendAPIWithTemplate(sender_psid);
         callSendAPIWithTemplate2(sender_psid);
+      
     }
-}
+
+
+    
+    
+  }
 
 
 
@@ -146,7 +183,8 @@ function handlePostback(sender_psid, received_postback) {
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
 }
-// Sends response messages via the Send API
+
+// test------------
 function callSendAPI2(sender_psid, response) {
     console.log("callSendAPI2--> respone---->", response);
     // Construct the message body
@@ -159,6 +197,7 @@ function callSendAPI2(sender_psid, response) {
 
   }
 
+  // Send the HTTP request to the Messenger Platform
   request({
     "uri": "https://graph.facebook.com/v2.6/me/messages",
     "qs": { "access_token": process.env.FB_PAGE_TOKEN },
@@ -186,6 +225,9 @@ function callSendAPI(sender_psid, response) {
         "message": { "text": response }
     };
 
+    //test---*******************
+
+
     // Send the HTTP request to the Messenger Platform
     request({
         "uri": "https://graph.facebook.com/v7.0/me/messages",
@@ -201,6 +243,51 @@ function callSendAPI(sender_psid, response) {
     });
 }
 
+// function firstTrait(nlp, name) {
+//     return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
+// }
+
+function firstTrait(nlp, name) {
+    return nlp && nlp.entities && nlp.traits[name] && nlp.traits[name][0];
+}
+
+// function handleMessage(sender_psid, message) {
+//     //handle message for react, like press like button
+//     // id like button: sticker_id 369239263222822
+
+//     if( message && message.attachments && message.attachments[0].payload){
+//         callSendAPI(sender_psid, "Thank you for watching my video !!!");
+//         callSendAPIWithTemplate(sender_psid);
+//         return;
+//     }
+
+//     let entitiesArr = [ "wit$greetings", "wit$thanks", "wit$bye" ];
+//     let entityChosen = "";
+//     entitiesArr.forEach((name) => {
+//         let entity = firstTrait(message.nlp, name);
+//         if (entity && entity.confidence > 0.8) {
+//             entityChosen = name;
+//         }
+//     });
+
+//     if(entityChosen === ""){
+//         //default
+//         callSendAPI(sender_psid,`The bot is needed more training, try to say "thanks a lot" or "hi" to the bot` );
+//     }else{
+//        if(entityChosen === "wit$greetings"){
+//            //send greetings message
+//            callSendAPI(sender_psid,'Hi there! This bot is created by Hary Pham. Watch more videos on HaryPhamDev Channel!');
+//        }
+//        if(entityChosen === "wit$thanks"){
+//            //send thanks message
+//            callSendAPI(sender_psid,`You 're welcome!`);
+//        }
+//         if(entityChosen === "wit$bye"){
+//             //send bye message
+//             callSendAPI(sender_psid,'bye-bye!');
+//         }
+//     }
+// }
 
 let callSendAPIWithTemplate = (sender_psid) => {
     // document fb message template
@@ -420,5 +507,5 @@ module.exports = {
   getWebhook: getWebhook
 };
 // git add .
-// git commit -m "first commit42"
+// git commit -m "first commit39"
 // refresh push
