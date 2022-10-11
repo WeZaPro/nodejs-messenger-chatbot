@@ -65,7 +65,7 @@ let getWebhook = (req, res) => {
     }
 };
 
-// Handles messages events
+// Handles messages events //test-----*******************
 function handleMessage(sender_psid, received_message) {
     let response;
 
@@ -75,9 +75,9 @@ function handleMessage(sender_psid, received_message) {
     // Check if the message contains text
     if (received_message.text) {
 
-        //test-----
+        //test-----*******************
         callSendAPI(sender_psid, "Thank you for watching my video !!!");
-//         callSendAPIWithTemplate(sender_psid);
+        callSendAPIWithTemplate(sender_psid);
         
 
         // Create the payload for a basic text message
