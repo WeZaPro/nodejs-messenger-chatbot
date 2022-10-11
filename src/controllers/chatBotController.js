@@ -146,6 +146,7 @@ function handleMessage(sender_psid, received_message) {
         callSendAPI2(sender_psid, response);
         callSendAPI(sender_psid, received_message.text);
         callSendAPIWithTemplate(sender_psid);
+        //callSendAPIWithTemplate2(sender_psid);
       
     } else{
         response = {
@@ -154,7 +155,7 @@ function handleMessage(sender_psid, received_message) {
 
         callSendAPI2(sender_psid, response);
         callSendAPI(sender_psid, received_message.text);
-        callSendAPIWithTemplate(sender_psid);
+        //callSendAPIWithTemplate(sender_psid);
         callSendAPIWithTemplate2(sender_psid);
       
     }
