@@ -137,7 +137,7 @@ function handleMessage(sender_psid, received_message) {
         //"text": `You sent the message: "${received_message.text}". Now send me an image!`
         //"message": `You sent the message: "${received_message.text}". Now send me an image!`
         
-        "message": { "text": `You sent the message: "${received_message.text}". Now send me an image!` }
+        "message": { "text": "response" }
       }
 
       console.log("handleMessage--> response--> ",response);
@@ -180,7 +180,7 @@ function callSendAPI2(sender_psid, response) {
     },
     response
     //"message": response
-    //"message": { "text": "callSendAPI2" }
+    //"message": { "text": response }
   }
 
   // Send the HTTP request to the Messenger Platform
