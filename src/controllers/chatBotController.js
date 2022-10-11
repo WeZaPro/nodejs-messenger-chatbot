@@ -138,7 +138,7 @@ function handleMessage(sender_psid, received_message) {
     //     callSendAPIWithTemplate(sender_psid);
     // }
 
-    if (received_message.text === 1) {    
+    if (received_message.text === "1") {    
         response = {
             "text": `You sent the message: 1 !`
         }
@@ -158,7 +158,7 @@ function handleMessage(sender_psid, received_message) {
       
     }
 
-    
+
     
     
   }
