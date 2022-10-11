@@ -136,13 +136,16 @@ function handleMessage(sender_psid, received_message) {
       response = {
         "text": `You sent the message: "${received_message.text}". Now send me an image!`
       }
+
+      callSendAPI(sender_psid, response);
+//         callSendAPIWithTemplate(sender_psid);
     }  
     
     // Sends the response message
-    callSendAPI(sender_psid, response);    
+    //callSendAPI(sender_psid, response);    
   }
 
-  
+
 
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
