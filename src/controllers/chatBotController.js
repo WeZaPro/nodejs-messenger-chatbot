@@ -75,6 +75,11 @@ function handleMessage(sender_psid, received_message) {
     // Check if the message contains text
     if (received_message.text) {
 
+        //test-----
+        callSendAPI(sender_psid, "Thank you for watching my video !!!");
+//         callSendAPIWithTemplate(sender_psid);
+        
+
         // Create the payload for a basic text message
         response = {
             "text": `You sent the message: "${received_message.text}". Now send me an image!`
