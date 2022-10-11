@@ -140,7 +140,7 @@ function handleMessage(sender_psid, received_message) {
 
     if (received_message.text === "1") {    
         response = {
-            "text": `You sent the message: 1 !`
+            "text": `You sent the message: 0000-1 !`
         }
 
         callSendAPI2(sender_psid, response);
