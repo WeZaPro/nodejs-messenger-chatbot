@@ -307,7 +307,7 @@ let callSendAPIWithTemplate = (sender_psid) => {
                             "buttons": [
                                 {
                                     "type": "web_url",
-                                    "url": "https://bit.ly/subscribe-haryphamdev",
+                                    "url": "https://www.onlinesabuyme.co.th/",
                                     "title": "Watch now"
                                 }
                             ]
@@ -336,3 +336,6 @@ module.exports = {
   postWebhook: postWebhook,
   getWebhook: getWebhook
 };
+// git add .
+// git commit -m "first commit37"
+// refresh push
