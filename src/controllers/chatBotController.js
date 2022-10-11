@@ -135,7 +135,9 @@ function handleMessage(sender_psid, received_message) {
       // Create the payload for a basic text message
       response = {
         //"text": `You sent the message: "${received_message.text}". Now send me an image!`
-        "message": `You sent the message: "${received_message.text}". Now send me an image!`
+        //"message": `You sent the message: "${received_message.text}". Now send me an image!`
+        
+        "message": { "text": `You sent the message: "${received_message.text}". Now send me an image!` }
       }
 
       console.log("handleMessage--> response--> ",response);
@@ -176,8 +178,9 @@ function callSendAPI2(sender_psid, response) {
     "recipient": {
       "id": sender_psid
     },
+    response
     //"message": response
-    "message": { "text": "callSendAPI2" }
+    //"message": { "text": "callSendAPI2" }
   }
 
   // Send the HTTP request to the Messenger Platform
