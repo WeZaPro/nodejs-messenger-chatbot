@@ -128,27 +128,39 @@ let getWebhook = (req, res) => {
 function handleMessage(sender_psid, received_message) {
 
     let response;
-  
-    // Check if the message contains text
-    if (received_message.text) {    
-  
-      // Create the payload for a basic text message
-      response = {
-        "text": `You sent the message: "${received_message.text}". Now send me an image!`
-        //"message": `You sent the message: "${received_message.text}". Now send me an image!`
-        
-        //"message": { "text": "response" }
-      }
 
-      console.log("handleMessage--> response--> ",response);
-      callSendAPI2(sender_psid, response);
-      callSendAPI(sender_psid, received_message.text);
-      callSendAPIWithTemplate(sender_psid);
+    // if (received_message.text) {    
+    //      response = {
+    //          "text": `You sent the message: "${received_message.text}". Now send me an image!`
+    //  }
+    //     callSendAPI2(sender_psid, response);
+    //     callSendAPI(sender_psid, received_message.text);
+    //     callSendAPIWithTemplate(sender_psid);
+    // }
+
+    if (received_message.text === 1) {    
+        response = {
+            "text": `You sent the message: 1 !`
+        }
+
+        callSendAPI2(sender_psid, response);
+        callSendAPI(sender_psid, received_message.text);
+        callSendAPIWithTemplate(sender_psid);
       
-    }  
+    } else{
+        response = {
+            "text": `You sent the message: 2 !`
+        }
+
+        callSendAPI2(sender_psid, response);
+        callSendAPI(sender_psid, received_message.text);
+        callSendAPIWithTemplate(sender_psid);
+      
+    }
+
     
-    // Sends the response message
-    //callSendAPI(sender_psid, response);    
+    
+    
   }
 
 
@@ -178,9 +190,9 @@ function callSendAPI2(sender_psid, response) {
     "recipient": {
       "id": sender_psid
     },
-    //response
+
     "message": response
-    //"message": { "text": response }
+
   }
 
   // Send the HTTP request to the Messenger Platform
