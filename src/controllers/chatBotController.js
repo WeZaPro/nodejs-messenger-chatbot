@@ -77,8 +77,11 @@ function handleMessage(sender_psid, received_message) {
 
         //test-----*******************
         // callSendAPI(sender_psid, "Thank you for watching my video !!!");
-        callSendAPI(sender_psid, response);
+        let response1 = {"text": `You sent the message: "${received_message.text}". Now send me an image!`}
+        callSendAPI(sender_psid, response1);
         callSendAPIWithTemplate(sender_psid);
+        
+
         
 
         // Create the payload for a basic text message
